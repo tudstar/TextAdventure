@@ -1,17 +1,17 @@
 package game.control;
 
-import game.model.Door;
-import game.model.Game;
-import game.model.Key;
-import game.model.Player;
+import game.model.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class Controller {
     public TextArea textAreaGameOutput;
-    public TextField testfieldCommand;
+    public TextField textfieldCommand;
 
     private Game game;
+    private  Player player;
     public void initialize() {
         System.out.println("test");
         game = new Game(10);
@@ -40,4 +40,11 @@ public class Controller {
     }
 
 
+    public void processCommand(KeyEvent keyEvent) {
+        if(keyEvent.getCode().equals(KeyCode.ENTER)) {
+            GameStrategy.processCommand(textfieldCommand.getText(), game, player);
+            textfieldCommand.clear();
+            textAreaGameOutput.appendText(game.displayBoard()+ "\n");
+        }
+    }
 }
