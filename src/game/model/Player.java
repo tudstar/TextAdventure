@@ -37,6 +37,10 @@ public void collect(CollectibleItem item) {
         this.horizontal = horizontal;
         this.vertical= vertical;
     }
+
+    public String getArtifacts(){
+        return artifacts.toString();
+    }
 }
 
 

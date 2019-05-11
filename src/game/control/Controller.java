@@ -19,9 +19,17 @@ public class Controller {
         Door door = new Door(key);
         Player player= new Player();
 
-        game.placeOnBoar(key, 2, 3);
-        game.placeOnBoar(door, 1,5);
-        game.placeOnBoar(player, 5,5);
+
+        System.out.println(game.displayBoard());
+
+        game.removeFromBoard(2,3);
+        System.out.println(game.displayBoard());
+
+        game.placeOnBoar(key,2,3);
+        game.movePlayer(player,2,3);
+        System.out.println(game.displayBoard());
+
+
 
         System.out.println(game.displayBoard());
         game.removeFromBoard( 2, 3);
