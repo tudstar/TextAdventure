@@ -25,7 +25,15 @@ public class Game {
 
 
     public boolean placeOnBoar(Object obj, int vertical, int horizontal) {
-        return false;
+        if(vertical >= gameBoard.length || horizontal >= gameBoard.length) {
+            throw new IllegalArgumentException("Should be smaller than" + gameBoard.length);
+        }
+        if(gameBoard[horizontal][vertical] !=null) {
+            return false;
+        } else{
+            gameBoard[horizontal][vertical] = obj;
+        }
+        return true;
     }
 
     /**
@@ -64,6 +72,7 @@ private  String centerCell(String input){
     public String displayBoard() {
         String toReturn = "";
         for (int i = 0; i < gameBoard.length; i++) {
+            toReturn += centerCell( (i+1)+"");
             for (int j = 0; j < gameBoard.length; j++) {
                 if (gameBoard[i][j] == null) {
                     toReturn += generateSpaces(CELL_DISPLAY_SIZE);
@@ -71,6 +80,7 @@ private  String centerCell(String input){
                     toReturn += centerCell(gameBoard[i][j].getClass().getSimpleName());
                 }
             }
+            toReturn += "\n";
         }
         return toReturn;
     }
