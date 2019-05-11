@@ -25,12 +25,12 @@ public class Game {
 
 
     public boolean placeOnBoar(Object obj, int vertical, int horizontal) {
-        if(vertical >= gameBoard.length || horizontal >= gameBoard.length) {
+        if (vertical >= gameBoard.length || horizontal >= gameBoard.length) {
             throw new IllegalArgumentException("Should be smaller than" + gameBoard.length);
         }
-        if(gameBoard[horizontal][vertical] !=null) {
+        if (gameBoard[horizontal][vertical] != null) {
             return false;
-        } else{
+        } else {
             gameBoard[horizontal][vertical] = obj;
         }
         return true;
@@ -44,35 +44,50 @@ public class Game {
      * @return the object to remove, null is the cell is empty;
      */
 
-    public Object removeFromBoard(Object obj, int vertical, int horizontal) {
-
-        return null;
+    public Object removeFromBoard(int vertical, int horizontal) {
+        if (vertical >= gameBoard.length || horizontal >= gameBoard.length) {
+            throw new IllegalArgumentException("Should be smaller than " + gameBoard.length);
+        }
+        Object toRemove = gameBoard[horizontal][vertical];
+        gameBoard[horizontal][vertical] = null;
+        return toRemove;
     }
+
     /* door key player
             tree
             a cell is maximum 10 spaces size. we put an artifact in the midle of the cell
      */
-private final int CELL_DISPLAY_SIZE = 10;
+    private final int CELL_DISPLAY_SIZE = 12;
 
-private String generateSpaces(int number){
-    String spaces = "";
-    for (int i=0; i < number; i++){
-        spaces+= " ";
+    private String generateSpaces(int number) {
+        String spaces = "";
+        for (int i = 0; i < number; i++) {
+            spaces += " ";
+        }
+        return spaces;
     }
-    return spaces;
-}
-private  String centerCell(String input){
-    String output =" ";
-    output += generateSpaces((CELL_DISPLAY_SIZE - input.length())/2)+
-            input +
-            generateSpaces((CELL_DISPLAY_SIZE - input.length())/2);
-    return output;
-}
+
+    private String centerCell(String input) {
+        String output = " ";
+        output += generateSpaces((CELL_DISPLAY_SIZE - input.length()) / 2) +
+                input +
+                generateSpaces((CELL_DISPLAY_SIZE - input.length()) / 2);
+        return output;
+    }
 
     public String displayBoard() {
         String toReturn = "";
+
+        toReturn += generateSpaces(CELL_DISPLAY_SIZE);
         for (int i = 0; i < gameBoard.length; i++) {
-            toReturn += centerCell( (i+1)+"");
+
+            toReturn += centerCell((i + 1) + " ");
+        }
+
+        toReturn+= "\n";
+
+        for (int i = 0; i < gameBoard.length; i++) {
+            toReturn += centerCell((i + 1) + "");
             for (int j = 0; j < gameBoard.length; j++) {
                 if (gameBoard[i][j] == null) {
                     toReturn += generateSpaces(CELL_DISPLAY_SIZE);
@@ -83,5 +98,20 @@ private  String centerCell(String input){
             toReturn += "\n";
         }
         return toReturn;
+    }
+
+    /**
+     *
+     * @param player 
+     * @param horizontal
+     * @param vertical
+     */
+
+    public void moveObject ( Player player, int horizontal, int vertical){
+        if (vertical >= gameBoard.length || horizontal >= gameBoard.length) {
+            throw new IllegalArgumentException("Should be smaller than " + gameBoard.length);
+        }
+
+
     }
 }

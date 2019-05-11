@@ -1,4 +1,4 @@
 package game.model;
 
-public class Key {
+public class Key extends Artifact implements CollectibleItem {
 }

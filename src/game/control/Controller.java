@@ -24,6 +24,9 @@ public class Controller {
         game.placeOnBoar(player, 5,5);
 
         System.out.println(game.displayBoard());
+        game.removeFromBoard( 2, 3);
+        System.out.println(game.displayBoard());
+
     }
 
 

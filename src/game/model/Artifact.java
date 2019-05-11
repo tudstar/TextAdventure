@@ -8,5 +8,6 @@ public class Artifact {
     @Override
     public String toString() {
         return super.toString();
+
     }
 }
