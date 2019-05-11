@@ -33,6 +33,9 @@ public class Game {
         } else {
             gameBoard[horizontal][vertical] = obj;
         }
+        if(obj instanceof Player) {
+            ((Player)obj).setPosition(horizontal,vertical);
+        }
         return true;
     }
 
@@ -102,16 +105,19 @@ public class Game {
 
     /**
      *
-     * @param player 
+     * @param player
      * @param horizontal
      * @param vertical
      */
 
-    public void moveObject ( Player player, int horizontal, int vertical){
+    public void movePlayer ( Player player, int horizontal, int vertical){
         if (vertical >= gameBoard.length || horizontal >= gameBoard.length) {
             throw new IllegalArgumentException("Should be smaller than " + gameBoard.length);
         }
-
+        
+        gameBoard[player.getHorizontal()][player.getVertical()] = null;
+        gameBoard[horizontal][vertical] = player;
+        player.setPosition(horizontal, vertical);
 
     }
 }
