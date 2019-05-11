@@ -110,14 +110,20 @@ public class Game {
      * @param vertical
      */
 
-    public void movePlayer ( Player player, int horizontal, int vertical){
+    public boolean movePlayer ( Player player, int horizontal, int vertical){
         if (vertical >= gameBoard.length || horizontal >= gameBoard.length) {
             throw new IllegalArgumentException("Should be smaller than " + gameBoard.length);
         }
-        
-        gameBoard[player.getHorizontal()][player.getVertical()] = null;
-        gameBoard[horizontal][vertical] = player;
-        player.setPosition(horizontal, vertical);
+        if (gameBoard[horizontal][vertical] instanceof CollectibleItem) {
+           player.collect((CollectibleItem)gameBoard[horizontal][vertical]);
+            gameBoard[player.getHorizontal()][player.getVertical()] = null;
+            gameBoard[horizontal][vertical] = player;
+            player.setPosition(horizontal, vertical);
+            player.setPosition(horizontal, vertical);
+            return true;
+
+        }
+        return false;
 
     }
 }
